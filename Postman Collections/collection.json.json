@@ -1,0 +1,1219 @@
+{
+	"info": {
+		"_postman_id": "2b3beac1-4760-4402-8da2-270db21ac3ee",
+		"name": "QA76m_PhoneBook",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Positive",
+					"item": [
+						{
+							"name": "Login Registered User",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "ea6485f4-811d-46d0-98f5-096c9de16a0c",
+										"exec": [
+											"var jsonData = pm.response.json();\r",
+											"pm.environment.set(\"token\", jsonData.token);"
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "a4da4cd9-0bbb-4d85-8269-22f3da665073",
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								}
+							],
+							"id": "906a3190-fd62-4c83-9259-7aaeec04dec5",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"username\": \"serdarkerimovv@gmail.com\",\r\n  \"password\": \"Qwertz123!\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{URL}}/v1/user/login/usernamepassword"
+							},
+							"response": []
+						}
+					],
+					"id": "0bfc71a2-b693-4490-9559-0306d4b51bd8",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "76db5f50-4600-4fc9-b630-a31fe1bd1478",
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {},
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "df2d9b5d-95bf-4ef5-8ab4-3a93328b9b73",
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {},
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code name has string: OK\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});"
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "Negative",
+					"item": [
+						{
+							"name": "Login with wrong password[401]",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "ea6485f4-811d-46d0-98f5-096c9de16a0c",
+										"exec": [
+											"// Проверяем, что сервер вернул статус-код 401\r",
+											"pm.test(\"Status code is 401\", () => {\r",
+											"    pm.response.to.have.status(401);\r",
+											"});\r",
+											"\r",
+											"// Проверяем, что в ответе есть сообщение об ошибке\r",
+											"pm.test(\"Error message exists\", () => {\r",
+											"    let json = pm.response.json();\r",
+											"    pm.expect(json.message).to.exist;\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "a4da4cd9-0bbb-4d85-8269-22f3da665073",
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								}
+							],
+							"id": "4231b250-edfa-4a6d-ac19-b28ab7b28366",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"username\": \"serdarkerimov@gmail.com\",\r\n  \"password\": \"wrong123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{URL}}/v1/user/login/usernamepassword"
+							},
+							"response": []
+						},
+						{
+							"name": "Login with wrong email [401]",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "ea6485f4-811d-46d0-98f5-096c9de16a0c",
+										"exec": [
+											"// Проверяем, что сервер вернул статус-код 401\r",
+											"pm.test(\"Status code is 401\", () => {\r",
+											"    pm.response.to.have.status(401);\r",
+											"});\r",
+											"\r",
+											"// Проверяем, что в ответе есть сообщение об ошибке\r",
+											"pm.test(\"Error message exists\", () => {\r",
+											"    let json = pm.response.json();\r",
+											"    pm.expect(json.message).to.exist;\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "a4da4cd9-0bbb-4d85-8269-22f3da665073",
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								}
+							],
+							"id": "00d7cae0-562e-45a1-8507-740787279809",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"username\": \"wrongemail@gmail.com\",\r\n  \"password\": \"Qwertz123!\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{URL}}/v1/user/login/usernamepassword"
+							},
+							"response": []
+						},
+						{
+							"name": "Login with empty body [401]",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "ea6485f4-811d-46d0-98f5-096c9de16a0c",
+										"exec": [
+											"// Проверяем, что сервер вернул статус-код 401\r",
+											"pm.test(\"Status code is 401\", () => {\r",
+											"    pm.response.to.have.status(401);\r",
+											"});\r",
+											"\r",
+											"// Проверяем, что в ответе есть ошибка\r",
+											"pm.test(\"Response has error message\", () => {\r",
+											"    let json = pm.response.json();\r",
+											"    pm.expect(json.message || json.error).to.exist;\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "a4da4cd9-0bbb-4d85-8269-22f3da665073",
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								}
+							],
+							"id": "a45ef312-1ade-47d0-ad55-52ab02f3f918",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{URL}}/v1/user/login/usernamepassword"
+							},
+							"response": []
+						},
+						{
+							"name": "Login with wrong format [400]",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "ea6485f4-811d-46d0-98f5-096c9de16a0c",
+										"exec": [
+											"// Проверяем, что сервер вернул статус-код 400\r",
+											"pm.test(\"Status code is 400\", () => {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"// Проверяем, что в ответе есть ошибка\r",
+											"pm.test(\"Response has error message\", () => {\r",
+											"    let json = pm.response.json();\r",
+											"    pm.expect(json.message || json.error).to.exist;\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "a4da4cd9-0bbb-4d85-8269-22f3da665073",
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								}
+							],
+							"id": "782857ff-b634-4f81-a037-61b1b79c8304",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"user\": \"test\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{URL}}/v1/user/login/usernamepassword"
+							},
+							"response": []
+						},
+						{
+							"name": "Login with wrong path [403]",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "ea6485f4-811d-46d0-98f5-096c9de16a0c",
+										"exec": [
+											"// Проверяем, что сервер вернул статус-код 403\r",
+											"pm.test(\"Status code is 403\", () => {\r",
+											"    pm.response.to.have.status(403);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "a4da4cd9-0bbb-4d85-8269-22f3da665073",
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								}
+							],
+							"id": "68c7153b-342d-47e5-a034-77a726446ed5",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"username\": \"serdarkerimov@gmail.com\",\r\n  \"password\": \"Qwertz123!\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{URL}}/v1/user/login/wrongpath"
+							},
+							"response": []
+						}
+					],
+					"id": "23806dfc-d19d-48ba-9077-01cbeb7b83a2"
+				}
+			],
+			"id": "c78389ff-7c0a-4525-88c0-0dfd1790ad6a"
+		},
+		{
+			"name": "Contact",
+			"item": [
+				{
+					"name": "Positive",
+					"item": [
+						{
+							"name": "Get all contacts before add",
+							"id": "641a4758-a3f0-49a3-93ea-e9f14cf57704",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": "{{URL}}/v1/contacts"
+							},
+							"response": []
+						},
+						{
+							"name": "Add contact",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "d2c98342-ff13-42a9-9840-f669687335da",
+										"exec": [
+											"pm.test(\"Body matches string: Contact was added!\", function () {\r",
+											"    pm.expect(pm.response.text()).to.include(\"Contact was added!\");\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "1862b871-b34d-450e-93cc-4496cb228852",
+										"exec": [],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"id": "0cf4175c-8305-4d5f-b9dd-d515cb9bfd9b",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"Lora\",\r\n  \"lastName\": \"Hasky\",\r\n  \"email\": \"Test@gmail.com\",\r\n  \"phone\": \"47264003326066\",\r\n  \"address\": \"Berlin\",\r\n  \"description\": \"QA\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{URL}}/v1/contacts"
+							},
+							"response": []
+						},
+						{
+							"name": "Get all contacts after add",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "dbcbe94a-c119-4a82-be17-8a38f81022b9",
+										"exec": [
+											"let response = pm.response.json();\r",
+											"//take first element of the contact array\r",
+											"let contactId = response.contacts[0].id;\r",
+											"//save in environment\r",
+											"pm.environment.set(\"id\",contactId);"
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "ae1173ef-6457-4ecd-ae46-c386c761a497",
+										"exec": [],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"id": "2c30a995-8958-47ff-8e31-e97eee615272",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": "{{URL}}/v1/contacts"
+							},
+							"response": []
+						},
+						{
+							"name": "Modify contact",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "d2c98342-ff13-42a9-9840-f669687335da",
+										"exec": [
+											"pm.test(\"API message:Contact was updated\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.message).to.eql(\"Contact was updated\");\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "1862b871-b34d-450e-93cc-4496cb228852",
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								}
+							],
+							"id": "62eb71f5-6feb-40db-992f-44f88f333558",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": \"{{id}}\",\r\n  \"name\": \"Lora\",\r\n  \"lastName\": \"Hasky\",\r\n  \"email\": \"Test@gmail.com\",\r\n  \"phone\": \"47264003326066\",\r\n  \"address\": \"Dresden\",\r\n  \"description\": \"QA\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{URL}}/v1/contacts"
+							},
+							"response": []
+						},
+						{
+							"name": "Delete contact by ID",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "ff7689c7-bc72-4f95-b467-3dc039e333dc",
+										"exec": [
+											"pm.test(\"API message: Contact was deleted\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.message).to.eql(\"Contact was deleted!\");\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "7f5daa8c-bdae-4a60-9405-f1aa7ba3859e",
+										"exec": [],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"id": "58aa34e1-8230-4172-8d3d-d0a1bf1d5000",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": "{{URL}}/v1/contacts/{{id}}"
+							},
+							"response": []
+						}
+					],
+					"id": "9d42049e-d20b-4474-a61d-329b855147d3",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "ab954a42-c3df-496f-8997-bcf6e3cc0aba",
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {},
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "1a3219b7-a7bf-430b-979d-152141a3b20f",
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {},
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code name has string: OK\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});"
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "Negative",
+					"item": [
+						{
+							"name": "Get all contacts without token [403]",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "4bf32be8-5348-44e4-903a-c0abf3aa9d69",
+										"exec": [
+											"// Проверяем, что без токена сервер вернул 403\r",
+											"pm.test(\"Status code is 403\", () => {\r",
+											"    pm.response.to.have.status(403);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "b6f37aa0-ab69-4147-9bab-ed84e1f3fca7",
+										"exec": [],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"id": "ec8b59fb-2e1e-408c-97fd-576292047ede",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": "{{URL}}/v1/contacts"
+							},
+							"response": []
+						},
+						{
+							"name": "Get all contacts with wrong token [401]",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "4bf32be8-5348-44e4-903a-c0abf3aa9d69",
+										"exec": [
+											"// Проверяем, что с неверным токеном сервер вернул 401\r",
+											"pm.test(\"Status code is 401\", () => {\r",
+											"    pm.response.to.have.status(401);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "dcd8cd24-a588-4e3f-8193-57c8a4f0d9db",
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								}
+							],
+							"id": "60a002ab-9eb5-4a73-bc67-9b50e26d743a",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer wrongToken123",
+										"type": "text"
+									}
+								],
+								"url": "{{URL}}/v1/contacts"
+							},
+							"response": []
+						},
+						{
+							"name": "Get all contacts with wrong path [403]",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "4bf32be8-5348-44e4-903a-c0abf3aa9d69",
+										"exec": [
+											"// Проверяем, что сервер вернул 403 для неверного пути\r",
+											"pm.test(\"Status code is 403\", () => {\r",
+											"    pm.response.to.have.status(403);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "dcd8cd24-a588-4e3f-8193-57c8a4f0d9db",
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								}
+							],
+							"id": "db74ae79-761f-4660-94c4-cee959910b42",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"url": "{{URL}}/v1/contactssss"
+							},
+							"response": []
+						},
+						{
+							"name": "Add contact without token [403]",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "d2c98342-ff13-42a9-9840-f669687335da",
+										"exec": [
+											"// Проверяем, что без токена сервер вернул 403\r",
+											"pm.test(\"Status code is 403\", () => {\r",
+											"    pm.response.to.have.status(403);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "1862b871-b34d-450e-93cc-4496cb228852",
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								}
+							],
+							"id": "ea763c48-4076-45f1-a86b-0ad6d3e4e6c1",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"Lora\",\r\n  \"lastName\": \"Hasky\",\r\n  \"email\": \"test@gmail.com\",\r\n  \"phone\": \"47264003326066\",\r\n  \"address\": \"Berlin\",\r\n  \"description\": \"QA\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{URL}}/v1/contacts"
+							},
+							"response": []
+						},
+						{
+							"name": "Add contact with wrong format [400]",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "d2c98342-ff13-42a9-9840-f669687335da",
+										"exec": [
+											"// Проверяем, что сервер вернул статус-код 400\r",
+											"pm.test(\"Status code is 400\", () => {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"// Проверяем, что в ответе есть ошибка\r",
+											"pm.test(\"Response has error message\", () => {\r",
+											"    let json = pm.response.json();\r",
+											"    pm.expect(json.message || json.error).to.exist;\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "1862b871-b34d-450e-93cc-4496cb228852",
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								}
+							],
+							"id": "6f62b847-e321-46a9-98e2-fa00fa902caa",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"Lora\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{URL}}/v1/contacts"
+							},
+							"response": []
+						},
+						{
+							"name": "Add contact with invalid email [400]",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "d2c98342-ff13-42a9-9840-f669687335da",
+										"exec": [
+											"// Проверяем, что сервер вернул статус-код 400\r",
+											"pm.test(\"Status code is 400\", () => {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"// Проверяем, что в ответе есть ошибка\r",
+											"pm.test(\"Response has error message\", () => {\r",
+											"    let json = pm.response.json();\r",
+											"    pm.expect(json.message || json.error).to.exist;\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "1862b871-b34d-450e-93cc-4496cb228852",
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								}
+							],
+							"id": "6821da79-a3eb-4a70-b24c-f3803bbe5185",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"Lora\",\r\n  \"lastName\": \"Hasky\",\r\n  \"email\": \"wrongEmail\",\r\n  \"phone\": \"47264003326066\",\r\n  \"address\": \"Berlin\",\r\n  \"description\": \"QA\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{URL}}/v1/contacts"
+							},
+							"response": []
+						},
+						{
+							"name": "Modify contact without token [403]",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "d2c98342-ff13-42a9-9840-f669687335da",
+										"exec": [
+											"// Проверяем, что без токена сервер вернул 403\r",
+											"pm.test(\"Status code is 403\", () => {\r",
+											"    pm.response.to.have.status(403);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "1862b871-b34d-450e-93cc-4496cb228852",
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								}
+							],
+							"id": "6f3c3104-61ba-472d-b930-23a7a5481be6",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"id\": \"{{id}}\",\r\n  \"name\": \"Lora\",\r\n  \"lastName\": \"Hasky\",\r\n  \"email\": \"test@gmail.com\",\r\n  \"phone\": \"47264003326066\",\r\n  \"address\": \"Dresden\",\r\n  \"description\": \"QA\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{URL}}/v1/contacts"
+							},
+							"response": []
+						},
+						{
+							"name": "Modify contact with wrong id [400]",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "d2c98342-ff13-42a9-9840-f669687335da",
+										"exec": [
+											"// Проверяем, что сервер вернул ошибку 400\r",
+											"pm.test(\"Status code is 400\", () => {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "1862b871-b34d-450e-93cc-4496cb228852",
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								}
+							],
+							"id": "8416129c-2817-4f87-bdf4-a5629e13be32",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"id\": \"wrong-id\",\r\n  \"name\": \"Lora\",\r\n  \"lastName\": \"Hasky\",\r\n  \"email\": \"test@gmail.com\",\r\n  \"phone\": \"47264003326066\",\r\n  \"address\": \"Dresden\",\r\n  \"description\": \"QA\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{URL}}/v1/contacts"
+							},
+							"response": []
+						},
+						{
+							"name": "Delete contact without token [403]",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "ff7689c7-bc72-4f95-b467-3dc039e333dc",
+										"exec": [
+											"// Проверяем, что без токена сервер вернул 403\r",
+											"pm.test(\"Status code is 403\", () => {\r",
+											"    pm.response.to.have.status(403);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "7f5daa8c-bdae-4a60-9405-f1aa7ba3859e",
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								}
+							],
+							"id": "23ae2e01-a93c-4134-b885-28bdca311052",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": "{{URL}}/v1/contacts/{{id}}"
+							},
+							"response": []
+						},
+						{
+							"name": "Delete contact with wrong id [400]",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "ff7689c7-bc72-4f95-b467-3dc039e333dc",
+										"exec": [
+											"// Проверяем, что сервер вернул ошибку 400\r",
+											"pm.test(\"Status code is 400\", () => {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "7f5daa8c-bdae-4a60-9405-f1aa7ba3859e",
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								}
+							],
+							"id": "781e4dba-6318-4d2d-9450-c73dc8f03ed4",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"url": "{{URL}}/v1/contacts/wrong-id"
+							},
+							"response": []
+						}
+					],
+					"id": "70484248-2b8d-4139-8a37-d163fe02be0e"
+				}
+			],
+			"id": "f43a7114-f0bb-4def-8f3f-10ba3b1a9947"
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "4efb278b-a3aa-4aa5-bc63-1c75682f627e",
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "660fa783-e8b4-42ed-8462-6a461ffe4c60",
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					"pm.test(\"Response time is less than 2000ms\", function () {\r",
+					"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+					"});"
+				]
+			}
+		}
+	]
+}
